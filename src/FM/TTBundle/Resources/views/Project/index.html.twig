@@ -1,0 +1,11 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    {% for entity in entities %}
+        <div class="row">
+            <div class="large-8 columns">
+                <h2><a href="{{ path('projects_show', {id: entity.id})}}">{{ entity.name }}</a></h2>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

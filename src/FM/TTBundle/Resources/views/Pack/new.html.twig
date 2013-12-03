@@ -1,0 +1,13 @@
+{% extends '::base.html.twig' %}
+
+{% block context -%}
+	You are creating a new pack for project <a href="{{path('projects_show', {id: entity.project.id})}}">{{entity.project.name}}</a>
+{% endblock %}
+
+{% block body -%}
+    <div class="row">
+    	<div class="large-12 columns with-margin-top">
+    		{{ form(form) }}
+    	</div>
+    </div>
+{% endblock %}

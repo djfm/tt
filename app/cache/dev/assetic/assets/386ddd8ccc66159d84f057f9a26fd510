@@ -1,0 +1,7 @@
+div.context-info
+{
+	margin-top: 5px;
+	color: orange;
+	font-weight: bold;
+	font-style: italic;
+}

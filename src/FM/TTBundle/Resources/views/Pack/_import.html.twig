@@ -1,0 +1,64 @@
+<div class="row">
+    <div class="large-12 columns">
+        <h2>Import Translations</h2>
+        <form enctype="multipart/form-data" method="POST" action="{{path('packs_import', {id: entity.id})}}">
+            <label for="source">Source File</label>
+            <input required id="source" name="source" type="file"></input>
+            <span class="field-error">{{errors.source | default('')}}</span>
+
+            <div class="row">
+                 <div class="large-4 columns">
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <label for="domain">Text Domain</label>
+                            <input required id="domain" name="domain" type="text" value="{{values.domain | default('')}}">
+                        </div>
+                        <div class="large-12 columns">
+                            <span class="field-error">{{errors.domain | default('')}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="large-4 columns">
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <label for="source_locale">Source Locale</label>
+                            <input required id="source_locale" name="source_locale" type="text" value="{{values.source_locale | default('')}}">
+                        </div>
+                        <div class="large-12 columns">
+                            <span class="field-error">{{errors.source_locale | default('')}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="large-4 columns">
+                     <div class="row">
+                        <div class="large-12 columns">
+                            <label for="target_locale">Target Locale</label>
+                            <input required id="target_locale" name="target_locale" type="text" value="{{values.target_locale | default('')}}">
+                        </div>
+                        <div class="large-12 columns">
+                            <span class="field-error">{{errors.target_locale | default('')}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="large-12 columns">
+                    <label for="use_messages_yes">Import Messages</label>
+                    <input type="radio" name="use_messages" id="use_messages_yes" value="1" {% if values.use_messages | default('0') == 1 %}checked{% endif %}>
+                    <label for="use_messages_yes">Yes</label>
+                    <input type="radio" name="use_messages" id="use_messages_no" value="0" {% if values.use_messages | default('0') == 0 %}checked{% endif %}>
+                    <label for="use_messages_no">No</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="large-12 columns">
+                    <span class="hint">
+                        If you choose to import messages, the messages will be added to this pack's messages. Otherwise only the translations will be imported. In both cases translations are imported.
+                    </span>
+                </div>
+            </div>
+           
+            <button>Import</button>
+        </form>
+    </div>
+</div>

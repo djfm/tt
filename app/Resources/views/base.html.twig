@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% stylesheets 
+            '@FMTTBundle/Resources/public/vendor/foundation/css/normalize.css' 
+            '@FMTTBundle/Resources/public/vendor/foundation/css/foundation.css' 
+            '@FMTTBundle/Resources/public/css/main.css'
+        %}
+            <link rel="stylesheet" href="{{asset_url}}">
+        {% endstylesheets %}
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        <nav class="top-bar docs-bar hide-for-small" data-topbar="">
+          <ul class="title-area">
+            <li class="name">
+              <h1><a href="http://tt.fmdj.fr">TT</a></h1>
+            </li>
+          </ul>
+        <section class="top-bar-section">
+            <ul class="left">
+              <li class="divider"></li>
+              <li class="">
+                <a href="{{ path('projects')}}" class="">Projects</a>
+              </li>
+              <li class="divider"></li>
+            </ul>
+          </section>
+        </nav>
+        <div class="row">
+            <div class="large-12 columns">
+                <div class="context-info">
+                    {% block context %}{% endblock %}
+                </div>
+            </div>
+        </div>
+        {% block body %}{% endblock %}            
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

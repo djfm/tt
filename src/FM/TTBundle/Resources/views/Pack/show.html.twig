@@ -1,0 +1,9 @@
+{% extends '::base.html.twig' %}
+
+{% block context %}
+    This is the pack <strong>{{entity.name}}</strong>, version <strong>{{entity.version}}</strong>, of project <a href="{{path('projects_show', {id: entity.project.id})}}">{{entity.project.name}}</a>.
+{% endblock %}
+
+{% block body -%}
+    {% include 'FMTTBundle:Pack:_import.html.twig' %}
+{% endblock %}

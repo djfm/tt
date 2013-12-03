@@ -1,0 +1,33 @@
+{% extends '::base.html.twig' %}
+
+{% block context %}
+    
+                You are currently browsing project {{entity.name}}. Here is a list of the packs available for translation contained in this project.
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block body %}
+    {% if entity.packs is empty %}
+        <div class="row">
+            <div class="large-12 columns">
+                <p>There are no packs in this project yet!</p>
+            </div>
+        </div>
+    {% else %}
+        {% for pack in entity.packs %}
+            <div class="row">
+                <div class="large-12 columns">
+                    <h2><a href="{{path('packs_show', {id: pack.id})}}">{{pack.name}} - {{pack.version}}</a></h2>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="row">
+        <div class="large-12 columns">
+            <form action="{{path('projects_packs_new', {id: entity.id})}}"><button>Create a new Pack</button></form>
+        </div>
+    </div>
+{% endblock %}
