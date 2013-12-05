@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * MappingComment
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="FM\TTBundle\Entity\MappingCommentRepository")
  */
 class MappingComment
 {
@@ -29,11 +29,9 @@ class MappingComment
     private $mappingId;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="user_id", type="integer")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="mappingComments")
      */
-    private $userId;
+    private $user;
 
     /**
      * @var string
@@ -147,5 +145,28 @@ class MappingComment
     public function getUserId()
     {
         return $this->userId;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \FM\TTBundle\Entity\User $user
+     * @return MappingComment
+     */
+    public function setUser(\FM\TTBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+    
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \FM\TTBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

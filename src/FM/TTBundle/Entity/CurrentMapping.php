@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Currentmapping
  *
  * @ORM\Table(name="CurrentMapping")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="CurrentMappingRepository")
  */
 class CurrentMapping
 {
@@ -34,6 +34,12 @@ class CurrentMapping
      * @ORM\ManyToOne(targetEntity="FM\TTBundle\Entity\Message")
      */
     private $message;
+
+    /**
+     * @var integer
+     * @ORM\Column(name="plurality", type="integer", nullable=false)
+     */
+    private $plurality;
 
     /**
      * @var \FM\TTBundle\Entity\Mapping
@@ -121,5 +127,28 @@ class CurrentMapping
     public function getMapping()
     {
         return $this->mapping;
+    }
+
+    /**
+     * Set plurality
+     *
+     * @param integer $plurality
+     * @return CurrentMapping
+     */
+    public function setPlurality($plurality)
+    {
+        $this->plurality = $plurality;
+    
+        return $this;
+    }
+
+    /**
+     * Get plurality
+     *
+     * @return integer 
+     */
+    public function getPlurality()
+    {
+        return $this->plurality;
     }
 }

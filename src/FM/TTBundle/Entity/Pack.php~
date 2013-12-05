@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Pack
  *
  * @ORM\Table(name="Pack")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="FM\TTBundle\Entity\PackRepository")
  */
 class Pack
 {

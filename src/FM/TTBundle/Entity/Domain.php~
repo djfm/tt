@@ -31,7 +31,7 @@ class Domain
     /**
      * @var \FM\TTBundle\Entity\Project
      *
-     * @ORM\ManyToOne(targetEntity="FM\TTBundle\Entity\Project")
+     * @ORM\ManyToOne(targetEntity="FM\TTBundle\Entity\Project", inversedBy="domains")
      */
     private $project;
 

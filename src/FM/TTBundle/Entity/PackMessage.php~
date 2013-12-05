@@ -27,7 +27,7 @@ class PackMessage
     private $pack;
 
     /**
-     * @ORM\ManyToOne(targetEntity="FM\TTBundle\Entity\Message", inversedBy="pack")
+     * @ORM\ManyToOne(targetEntity="FM\TTBundle\Entity\Message", inversedBy="packs")
      */
     private $message;
 

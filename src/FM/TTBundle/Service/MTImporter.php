@@ -151,27 +151,56 @@ class MTImporter
 						   		$message,
 						   		$translation
 						   	);
+				
+				// Add the mapping (translation) comments
+				// a comment is identified by:
+				// - mapping
+				// - comment
+				if('' !== ($comment_text=trim($mt['translation_comments'])))
+				{
+					$this->em->getRepository('FMTTBundle:MappingComment')
+					->getOrCreateMappingComment($user, $mapping, $comment_text);
+				}
+
+				// Update CurrentMapping if there is none
+				// or if we want to force it
+				$this->em->getRepository('FMTTBundle:CurrentMapping')
+				->getOrCreateCurrentMapping(
+					$message,
+					$mapping,
+					false
+				);
+
 			}
-			// Add the mapping (translation) comments
-			// a comment is identified by:
-			// - comment
-			// - user
-			
+
 			// Add the message comments
 			// a comment is identified by:
 			// - comment
-			// - user
+			if('' !== ($comment_text=trim($mt['message_comments'])))
+			{
+				$this->em->getRepository('FMTTBundle:MessageComment')
+				->getOrCreateMessageComment(
+					$user,
+					$message,
+					$comment_text
+				);
+			}
 
-			// Update CurrentMapping if there is none
-			// or if we want to force it
+
+			// Looks like we're done at last!
+			// Commit!
 			$this->em->flush();
 
+			// And cleanup our mess.
 			// I don't need you anymore, girls
 			$this->em->clear('FM\TTBundle\Entity\Message');
 			$this->em->clear('FM\TTBundle\Entity\MessageData');
 			$this->em->clear('FM\TTBundle\Entity\PackMessage');
 			$this->em->clear('FM\TTBundle\Entity\Translation');
 			$this->em->clear('FM\TTBundle\Entity\Mapping');
+			$this->em->clear('FM\TTBundle\Entity\MappingComment');
+			$this->em->clear('FM\TTBundle\Entity\CurrentMapping');
+			$this->em->clear('FM\TTBundle\Entity\MessageComment');
 
 			//$this->logger->info("UOW Size: ".$this->em->getUnitOfWork()->size());
 			if($this->em->getUnitOfWork()->size() > 30)

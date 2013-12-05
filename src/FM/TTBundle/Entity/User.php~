@@ -22,9 +22,16 @@ class User extends BaseUser
      */
     protected $id;
 
+    /**
+     * @ORM\OneToMany(targetEntity="MappingComment", mappedBy="user")
+     */
+    protected $mappingComments;
+
     public function __construct()
     {
         parent::__construct();
+
+        $this->mappingComments = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -35,5 +42,38 @@ class User extends BaseUser
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Add mappingComments
+     *
+     * @param \FM\TTBundle\Entity\MappingComment $mappingComments
+     * @return User
+     */
+    public function addMappingComment(\FM\TTBundle\Entity\MappingComment $mappingComments)
+    {
+        $this->mappingComments[] = $mappingComments;
+    
+        return $this;
+    }
+
+    /**
+     * Remove mappingComments
+     *
+     * @param \FM\TTBundle\Entity\MappingComment $mappingComments
+     */
+    public function removeMappingComment(\FM\TTBundle\Entity\MappingComment $mappingComments)
+    {
+        $this->mappingComments->removeElement($mappingComments);
+    }
+
+    /**
+     * Get mappingComments
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMappingComments()
+    {
+        return $this->mappingComments;
     }
 }

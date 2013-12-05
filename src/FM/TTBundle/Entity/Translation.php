@@ -161,4 +161,44 @@ class Translation
     {
         return $this->user;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->mappings = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add mappings
+     *
+     * @param \FM\TTBundle\Entity\Mapping $mappings
+     * @return Translation
+     */
+    public function addMapping(\FM\TTBundle\Entity\Mapping $mappings)
+    {
+        $this->mappings[] = $mappings;
+    
+        return $this;
+    }
+
+    /**
+     * Remove mappings
+     *
+     * @param \FM\TTBundle\Entity\Mapping $mappings
+     */
+    public function removeMapping(\FM\TTBundle\Entity\Mapping $mappings)
+    {
+        $this->mappings->removeElement($mappings);
+    }
+
+    /**
+     * Get mappings
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMappings()
+    {
+        return $this->mappings;
+    }
 }

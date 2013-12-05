@@ -244,4 +244,50 @@ class Mapping
     {
         return $this->plurality;
     }
+
+    /**
+     * Set message_id
+     *
+     * @param integer $messageId
+     * @return Mapping
+     */
+    public function setMessageId($messageId)
+    {
+        $this->message_id = $messageId;
+    
+        return $this;
+    }
+
+    /**
+     * Get message_id
+     *
+     * @return integer 
+     */
+    public function getMessageId()
+    {
+        return $this->message_id;
+    }
+
+    /**
+     * Set translation_id
+     *
+     * @param integer $translationId
+     * @return Mapping
+     */
+    public function setTranslationId($translationId)
+    {
+        $this->translation_id = $translationId;
+    
+        return $this;
+    }
+
+    /**
+     * Get translation_id
+     *
+     * @return integer 
+     */
+    public function getTranslationId()
+    {
+        return $this->translation_id;
+    }
 }
