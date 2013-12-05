@@ -26,6 +26,7 @@ class MTImporter
 		$project = $pack->getProject();
 
 		$this->em->getUnitOfWork()->markReadOnly($project);
+		$this->em->getUnitOfWork()->markReadOnly($pack);
 
 
 		// Get or create Domain
@@ -65,6 +66,8 @@ class MTImporter
 
 			// Set the extra data,
 			// overriding any previously set extra data
+
+			// So clear the old data
 			$hadData = count($message->getData()) > 0;
 			foreach($message->getData() as $data)
 			{
@@ -72,6 +75,7 @@ class MTImporter
 				$this->em->remove($data);
 			}
 
+			// And add the new data
 			foreach($mt['data'] as $key => $value)
 			{
 				$data = new \FM\TTBundle\Entity\MessageData();
@@ -94,9 +98,25 @@ class MTImporter
 			// Add the message to the pack if necessary
 			// and if we want to
 
+			if(true === $import_messages)
+			{
+				if($message->getId() === 0 ||
+					!$this->em->getRepository('FMTTBundle:Pack')
+					->hasMessage($pack, $message)
+				)
+				{
+					$pm = new \FM\TTBundle\Entity\PackMessage();
+					$pm->setPack($pack);
+					$pm->setMessage($message);
+					$this->em->persist($message);
+					$this->em->persist($pm);
+				}
+			}
+
 			// Put the message in the right categories,
 			// deleting all previous associations of this
 			// message to a category
+			// TODO
 
 			// Get or create the translations -
 			// a translation is identified by:
@@ -105,13 +125,33 @@ class MTImporter
 			// - msgstr
 			// If we create translations, set user to $user
 
+			$translations = array();
+			foreach($mt['translations'] as $plurality => $msgstr)
+			{
+				$translations[] = $this->em->getRepository('FMTTBundle:Translation')
+							      ->getOrCreateTranslation(
+							   		$user,
+							   		$mt['target_locale'],
+							   		$plurality,
+							   		$msgstr
+							   	);
+			}
+
 			// Create missing Mappings -
 			// a mapping is identified by:
 			// - message
 			// - plurality
 			// - translation
 			// If we create mappings, set user to $user
-
+			foreach($translations as $plurality => $translation)
+			{
+				$mapping = $this->em->getRepository('FMTTBundle:Mapping')
+						   ->getOrCreateMapping(
+						   		$user,
+						   		$message,
+						   		$translation
+						   	);
+			}
 			// Add the mapping (translation) comments
 			// a comment is identified by:
 			// - comment
@@ -129,6 +169,9 @@ class MTImporter
 			// I don't need you anymore, girls
 			$this->em->clear('FM\TTBundle\Entity\Message');
 			$this->em->clear('FM\TTBundle\Entity\MessageData');
+			$this->em->clear('FM\TTBundle\Entity\PackMessage');
+			$this->em->clear('FM\TTBundle\Entity\Translation');
+			$this->em->clear('FM\TTBundle\Entity\Mapping');
 
 			//$this->logger->info("UOW Size: ".$this->em->getUnitOfWork()->size());
 			if($this->em->getUnitOfWork()->size() > 30)

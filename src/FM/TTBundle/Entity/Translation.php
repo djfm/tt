@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Translation
  *
  * @ORM\Table(name="Translation", indexes={@ORM\Index(name="TranslationIdAndPlurality", columns={"id", "plurality"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="FM\TTBundle\Entity\TranslationRepository")
  */
 class Translation
 {
@@ -51,6 +51,12 @@ class Translation
      * })
      */
     private $user;
+
+     /**
+     *
+     * @ORM\OneToMany(targetEntity="FM\TTBundle\Entity\Mapping", mappedBy="translation")
+     */
+    private $mappings;
 
 
 

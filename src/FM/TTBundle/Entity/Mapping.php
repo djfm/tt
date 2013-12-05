@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Mapping
  *
  * @ORM\Table(name="Mapping")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="FM\TTBundle\Entity\MappingRepository")
  */
 class Mapping
 {
@@ -27,6 +27,12 @@ class Mapping
      * @ORM\ManyToOne(targetEntity="FM\TTBundle\Entity\Message")
      */
     private $message;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="message_id", type="integer", nullable=false)
+     */
+    private $message_id;
 
     /**
      * @var integer
@@ -38,13 +44,15 @@ class Mapping
     /**
      * @var \FM\TTBundle\Entity\Translation
      *
-     * @ORM\ManyToOne(targetEntity="FM\TTBundle\Entity\Translation")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="translation_id", referencedColumnName="id"),
-     *   @ORM\JoinColumn(name="plurality", referencedColumnName="plurality")
-     * })
+     * @ORM\ManyToOne(targetEntity="FM\TTBundle\Entity\Translation", inversedBy="mappings")
      */
     private $translation;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="translation_id", type="integer", nullable=false)
+     */
+    private $translation_id;
 
     /**
      * @var \FM\TTBundle\Entity\User

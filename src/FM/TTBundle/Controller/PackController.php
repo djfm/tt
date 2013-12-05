@@ -262,7 +262,7 @@ class PackController extends Controller
             $errors['domain'] = 'Invalid domain!';
         }
 
-        $useMessages = $request->request->get('use_messages');
+        $useMessages = $request->request->get('use_messages') == 1;
 
         if(count($errors) === 0)
         {

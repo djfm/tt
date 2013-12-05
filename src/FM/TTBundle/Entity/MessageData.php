@@ -38,7 +38,7 @@ class MessageData
     /**
      * @var \FM\TTBundle\Entity\Message
      *
-     * @ORM\ManyToOne(targetEntity="FM\TTBundle\Entity\Message")
+     * @ORM\ManyToOne(targetEntity="FM\TTBundle\Entity\Message", inversedBy="data")
      * @ORM\JoinColumn(name="message_id", referencedColumnName="id", nullable=false)
      */
     private $message;
