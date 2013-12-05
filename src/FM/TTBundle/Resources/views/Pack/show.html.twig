@@ -1,9 +1,15 @@
 {% extends '::base.html.twig' %}
 
 {% block context %}
-    This is the pack <strong>{{entity.name}}</strong>, version <strong>{{entity.version}}</strong>, of project <a href="{{path('projects_show', {id: entity.project.id})}}">{{entity.project.name}}</a>.
+	<div class="panel">
+		 <p>This is the <strong>{{entity.name}}</strong> pack, version <strong>{{entity.version}}</strong>, of project <a href="{{path('projects_show', {id: entity.project.id})}}">{{entity.project.name}}</a>.</p>
+		 <p>
+		 Here you can either translate the pack or import translations and / or messages for this pack.</p>
+	</div>
+   
 {% endblock %}
 
 {% block body -%}
+	<h1>Translate this Pack</h1>
     {% include 'FMTTBundle:Pack:_import.html.twig' %}
 {% endblock %}

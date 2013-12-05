@@ -1,20 +1,15 @@
 {% extends '::base.html.twig' %}
 
 {% block context %}
-    
-                You are currently browsing project {{entity.name}}. Here is a list of the packs available for translation contained in this project.
-            </div>
-        </div>
+    <div class="panel">
+        <p>You are currently browsing project {{entity.name}}. Here is a list of the packs available for translation in this project.</p>
     </div>
 {% endblock %}
 
 {% block body %}
+    <h1>Packs in this Project</h1>
     {% if entity.packs is empty %}
-        <div class="row">
-            <div class="large-12 columns">
-                <p>There are no packs in this project yet!</p>
-            </div>
-        </div>
+        <p>There are no packs in this project yet!</p>
     {% else %}
         {% for pack in entity.packs %}
             <div class="row">
@@ -25,7 +20,7 @@
         {% endfor %}
     {% endif %}
 
-    <div class="row">
+    <div class="row actions-after-list">
         <div class="large-12 columns">
             <form action="{{path('projects_packs_new', {id: entity.id})}}"><button>Create a new Pack</button></form>
         </div>

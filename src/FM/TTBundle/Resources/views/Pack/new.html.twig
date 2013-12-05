@@ -1,7 +1,9 @@
 {% extends '::base.html.twig' %}
 
 {% block context -%}
-	You are creating a new pack for project <a href="{{path('projects_show', {id: entity.project.id})}}">{{entity.project.name}}</a>
+	<div class="panel">
+		You are creating a new pack for project <a href="{{path('projects_show', {id: entity.project.id})}}">{{entity.project.name}}</a>
+	</div>
 {% endblock %}
 
 {% block body -%}

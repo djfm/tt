@@ -1,14 +1,17 @@
 div.context-info
 {
 	margin-top: 5px;
-	color: orange;
-	font-weight: bold;
-	font-style: italic;
+}
+
+h1
+{
+	border-bottom: 1px solid #CCC;
 }
 
 div.context-info strong
 {
-	color: #555;
+	font-style: italic;
+	font-weight: normal;
 }
 
 .with-margin-top
@@ -33,4 +36,9 @@ span.field-error
 	display: block;
 	font-size: 0.9em;
 	margin-bottom: 10px;
+}
+
+div.row.actions-after-list
+{
+	margin-top: 50px;
 }
